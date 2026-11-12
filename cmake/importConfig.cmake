@@ -5,7 +5,7 @@ target_compile_features(${PROJECT_NAME}
 
 target_compile_definitions(${PROJECT_NAME}
     PRIVATE
-    QZeroPackage
+    ZeroPackage
 )
 
 if(MSVC)

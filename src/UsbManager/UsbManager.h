@@ -3,7 +3,7 @@ _Pragma("once");
 #include <map>
 
 #if defined(_WIN32) && defined(_MSC_VER)
-    #ifdef QZeroPackage
+    #ifdef ZeroPackage
         #define ZERO_API __declspec(dllexport)
     #else
         #define ZERO_API __declspec(dllimport)
