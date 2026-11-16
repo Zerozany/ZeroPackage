@@ -3,18 +3,18 @@ _Pragma("once");
 #include <map>
 
 #if defined(_WIN32) && defined(_MSC_VER)
-    #ifdef ZeroPackage
-        #define ZERO_API __declspec(dllexport)
+    #ifdef ZEROPACKAGE_BUILDING
+        #define PACKAGE_DLL __declspec(dllexport)
     #else
-        #define ZERO_API __declspec(dllimport)
+        #define PACKAGE_DLL __declspec(dllimport)
     #endif
 #elif defined(__GNUC__) || defined(__clang__)
-    #define ZERO_API __attribute__((visibility("default")))
+    #define PACKAGE_DLL __attribute__((visibility("default")))
 #else
-    #define ZERO_API
+    #define PACKAGE_DLL
 #endif
 
-class ZERO_API UsbManager
+class PACKAGE_DLL UsbManager
 {
 public:
     explicit(true) UsbManager();
