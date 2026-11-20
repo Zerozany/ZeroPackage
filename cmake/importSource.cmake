@@ -1,6 +1,7 @@
 file(GLOB_RECURSE SOURCEFILES
     "${CMAKE_CURRENT_SOURCE_DIR}/src/*.h"
     "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/*.hpp"
 )
 
 target_sources(${PROJECT_NAME}
