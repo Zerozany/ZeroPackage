@@ -17,12 +17,12 @@ _Pragma("once");
     #define PACKAGE_DLL
 #endif
 
-class PACKAGE_DLL SpdLogger
+class PACKAGE_DLL LogManager
 {
 public:
-    static auto instance() noexcept -> SpdLogger*;
+    static auto instance() noexcept -> LogManager*;
 
-    ~SpdLogger() noexcept;
+    ~LogManager() noexcept;
 
 public:
     auto init(const std::string& _logPath, std::size_t _logNum = 3) noexcept -> void;
@@ -48,14 +48,14 @@ public:
     auto critical(fmt::format_string<Args...> _fmt, Args&&... _args) noexcept -> void;
 
 private:
-    explicit(true) SpdLogger();
+    explicit(true) LogManager();
 
 private:
     std::shared_ptr<spdlog::logger> m_LoggerInstance{nullptr};
 };
 
 template <typename... Args>
-inline auto SpdLogger::trace(fmt::format_string<Args...> _fmt, Args&&... _args) noexcept -> void
+inline auto LogManager::trace(fmt::format_string<Args...> _fmt, Args&&... _args) noexcept -> void
 {
     if (!m_LoggerInstance)
     {
@@ -65,7 +65,7 @@ inline auto SpdLogger::trace(fmt::format_string<Args...> _fmt, Args&&... _args) 
 }
 
 template <typename... Args>
-inline auto SpdLogger::debug(fmt::format_string<Args...> _fmt, Args&&... _args) noexcept -> void
+inline auto LogManager::debug(fmt::format_string<Args...> _fmt, Args&&... _args) noexcept -> void
 {
     if (!m_LoggerInstance)
     {
@@ -75,7 +75,7 @@ inline auto SpdLogger::debug(fmt::format_string<Args...> _fmt, Args&&... _args) 
 }
 
 template <typename... Args>
-inline auto SpdLogger::info(fmt::format_string<Args...> _fmt, Args&&... _args) noexcept -> void
+inline auto LogManager::info(fmt::format_string<Args...> _fmt, Args&&... _args) noexcept -> void
 {
     if (!m_LoggerInstance)
     {
@@ -85,7 +85,7 @@ inline auto SpdLogger::info(fmt::format_string<Args...> _fmt, Args&&... _args) n
 }
 
 template <typename... Args>
-inline auto SpdLogger::warn(fmt::format_string<Args...> _fmt, Args&&... _args) noexcept -> void
+inline auto LogManager::warn(fmt::format_string<Args...> _fmt, Args&&... _args) noexcept -> void
 {
     if (!m_LoggerInstance)
     {
@@ -95,7 +95,7 @@ inline auto SpdLogger::warn(fmt::format_string<Args...> _fmt, Args&&... _args) n
 }
 
 template <typename... Args>
-inline auto SpdLogger::error(fmt::format_string<Args...> _fmt, Args&&... _args) noexcept -> void
+inline auto LogManager::error(fmt::format_string<Args...> _fmt, Args&&... _args) noexcept -> void
 {
     if (!m_LoggerInstance)
     {
@@ -105,7 +105,7 @@ inline auto SpdLogger::error(fmt::format_string<Args...> _fmt, Args&&... _args) 
 }
 
 template <typename... Args>
-inline auto SpdLogger::critical(fmt::format_string<Args...> _fmt, Args&&... _args) noexcept -> void
+inline auto LogManager::critical(fmt::format_string<Args...> _fmt, Args&&... _args) noexcept -> void
 {
     if (!m_LoggerInstance)
     {

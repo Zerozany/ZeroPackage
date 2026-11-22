@@ -1,4 +1,4 @@
-#include "SpdLogger.h"
+#include "LogManager.h"
 #include <spdlog/async.h>
 #include <spdlog/sinks/stdout_color_sinks.h>
 #include <spdlog/sinks/rotating_file_sink.h>
@@ -11,23 +11,23 @@
 
 static constexpr std::size_t LOGSIZE{1024 * 1024 * 5};
 
-auto SpdLogger::instance() noexcept -> SpdLogger*
+auto LogManager::instance() noexcept -> LogManager*
 {
-    static SpdLogger* zeroLogger{new SpdLogger{}};
+    static LogManager* zeroLogger{new LogManager{}};
     return zeroLogger;
 }
 
-SpdLogger::SpdLogger()
+LogManager::LogManager()
 {
 }
 
-SpdLogger::~SpdLogger() noexcept
+LogManager::~LogManager() noexcept
 {
     spdlog::shutdown();
     m_LoggerInstance.reset();
 }
 
-auto SpdLogger::init(const std::string& _logPath, std::size_t _logNum) noexcept -> void
+auto LogManager::init(const std::string& _logPath, std::size_t _logNum) noexcept -> void
 {
     try
     {
@@ -50,7 +50,7 @@ auto SpdLogger::init(const std::string& _logPath, std::size_t _logNum) noexcept 
         fileSink->set_level(spdlog::level::warn);
         sinks.push_back(fileSink);
 
-        m_LoggerInstance = std::make_shared<spdlog::async_logger>("SpdLogger", sinks.begin(), sinks.end(), spdlog::thread_pool(), spdlog::async_overflow_policy::block);
+        m_LoggerInstance = std::make_shared<spdlog::async_logger>("LogManager", sinks.begin(), sinks.end(), spdlog::thread_pool(), spdlog::async_overflow_policy::block);
         m_LoggerInstance->flush_on(spdlog::level::trace);
         spdlog::register_logger(m_LoggerInstance);
         spdlog::set_default_logger(m_LoggerInstance);
@@ -62,7 +62,7 @@ auto SpdLogger::init(const std::string& _logPath, std::size_t _logNum) noexcept 
     }
 }
 
-auto SpdLogger::set_level(const spdlog::level::level_enum& _level) noexcept -> void
+auto LogManager::set_level(const spdlog::level::level_enum& _level) noexcept -> void
 {
     m_LoggerInstance->set_level(_level);
 }
