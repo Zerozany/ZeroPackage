@@ -27,6 +27,8 @@ public:
 public:
     auto init(const std::string& _logPath, std::size_t _logNum = 3) noexcept -> void;
 
+    auto set_level(const spdlog::level::level_enum& _level) noexcept -> void;
+
     template <typename... Args>
     auto trace(fmt::format_string<Args...> _fmt, Args&&... _args) noexcept -> void;
 

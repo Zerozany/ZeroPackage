@@ -61,3 +61,8 @@ auto LogManager::init(const std::string& _logPath, std::size_t _logNum) noexcept
         std::println("Failed to enable the logging function:{}", _e.what());
     }
 }
+
+auto LogManager::set_level(const spdlog::level::level_enum& _level) noexcept -> void
+{
+    m_LoggerInstance->set_level(_level);
+}
